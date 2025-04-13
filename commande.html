@@ -25,11 +25,14 @@
 
     <div class="order-form">
         <h3>Informations de livraison</h3>
-        <form id="paymentForm" class="fm">
-            <input type="text" id="name" class="N" placeholder="Nom" required><br>
-            <input type="number" id="numero" class="E" placeholder="Numero de téléphone" required><br>
-            <input type="text" id="address" class="A" placeholder="addresse(quartier,rue,porte)" required><br>
-           
+<form action="https://formspree.io/f/xwplyjng" method="POST">
+    <input type="text" name="Nom" placeholder="Nom" required><br>
+    <input type="tel" name="Numéro de téléphone" placeholder="Numéro de téléphone" required><br>
+    <input type="text" name="Adresse" placeholder="Adresse (quartier, rue, porte)" required><br>
+    <textarea name="Commande" placeholder="Détail de la commande" required></textarea><br>
+    <button type="submit">Passer la commande</button>
+</form>
+
           
             <button type="submit" class="P">Passer la commande</button>
         </form>
