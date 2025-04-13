@@ -30,45 +30,59 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
+        // Appel de la fonction pour traiter la commande et envoyer les détails par email
         processPayment(name, numero, address);
     });
 
     function processPayment(name, numero, address) {
+        // Message de confirmation pour l'utilisateur
         const paymentMessage = document.getElementById('paymentMessage');
         paymentMessage.innerHTML = `<p>Merci pour votre commande, ${name}!</p>
-                                    <p>Nous vous prions de patienté.</p>
+                                    <p>Nous vous prions de patienter.</p>
                                     <p>Votre commande est prise en charge et elle sera livrée à l'adresse : ${address}</p>
-                                    <p>nous pourrons vous appelé sur votre numero( ${numero} ) donc gardez le près de vous</p>`;
-                                    
+                                    <p>Nous pourrons vous appeler sur votre numéro (${numero}) donc gardez-le près de vous.</p>`;
 
+        // Envoi des détails de la commande par email via Formspree
+        sendOrderDetailsByEmail(name, numero, address);
+
+        // Vider le panier après la commande
         localStorage.removeItem('cart');
         localStorage.removeItem('stock');
     }
-    
+
+    function sendOrderDetailsByEmail(name, numero, address) {
+        // Récupérer le panier
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let orderDetails = `Nom : ${name}\nNuméro : ${numero}\nAdresse : ${address}\n\nDétails de la commande:\n`;
+
+        cart.forEach(item => {
+            orderDetails += `${item.name} x${item.quantity} - ${item.price * item.quantity} f cfa\n`;
+        });
+
+        const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        orderDetails += `\nTotal : ${totalPrice} f cfa`;
+
+        // Envoi des détails de la commande à Formspree
+        fetch("https://formspree.io/f/xwplyjng", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: name,
+                email: "delicefastfood7@gmail.com", // Tu peux ajouter un champ email ici si tu veux
+                message: orderDetails
+            }),
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log("Commande envoyée avec succès !");
+            } else {
+                console.log("Erreur lors de l'envoi de la commande.");
+            }
+        })
+        .catch(error => {
+            console.log("Erreur:", error);
+        });
+    }
 });
-document.addEventListener("DOMContentLoaded", () => {
-    const orderList = document.querySelector("#orderList");
-    const orderDetails = document.querySelector("#orderDetails");
-    const totalPrice = document.querySelector("#totalPrice");
-
-    let panier = JSON.parse(localStorage.getItem("panier")) || [];
-
-    let total = 0;
-    let detailsTexte = "";
-
-    panier.forEach(item => {
-        let li = document.createElement("li");
-        li.textContent = `${item.nom} - ${item.prix}€`;
-        orderList.appendChild(li);
-
-        total += item.prix;
-        detailsTexte += `• ${item.nom} - ${item.prix}€\n`;
-    });
-
-    totalPrice.textContent = `Total: ${total}€`;
-    detailsTexte += `\nTotal: ${total}€`;
-
-    // Remplir la zone de texte automatiquement
-    orderDetails.value = detailsTexte;
-});
-
