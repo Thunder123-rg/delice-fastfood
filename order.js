@@ -10,12 +10,12 @@ document.addEventListener("DOMContentLoaded", function() {
         orderList.innerHTML = '';
         cart.forEach(item => {
             const li = document.createElement('li');
-            li.textContent = `${item.name} x${item.quantity} - ${item.price * item.quantity} f cfa`;
+            li.textContent = `${item.name} x${item.quantity} - ${item.price * item.quantity} F CFA`;
             orderList.appendChild(li);
             totalPrice += item.price * item.quantity;
         });
 
-        totalPriceElement.textContent = `Total: ${totalPrice} f cfa`;
+        totalPriceElement.textContent = `Total: ${totalPrice} F CFA`;
     }
 
     const paymentForm = document.getElementById('paymentForm');
@@ -30,59 +30,53 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        // Appel de la fonction pour traiter la commande et envoyer les détails par email
+        sendOrderDetailsByEmail(name, numero, address);
         processPayment(name, numero, address);
     });
 
     function processPayment(name, numero, address) {
-        // Message de confirmation pour l'utilisateur
         const paymentMessage = document.getElementById('paymentMessage');
-        paymentMessage.innerHTML = `<p>Merci pour votre commande, ${name}!</p>
-                                    <p>Nous vous prions de patienter.</p>
-                                    <p>Votre commande est prise en charge et elle sera livrée à l'adresse : ${address}</p>
-                                    <p>Nous pourrons vous appeler sur votre numéro (${numero}) donc gardez-le près de vous.</p>`;
+        paymentMessage.innerHTML = `<p>Merci pour votre commande, ${name} !</p>
+            <p>Nous vous prions de patienter.</p>
+            <p>Votre commande est prise en charge et elle sera livrée à l'adresse : ${address}</p>
+            <p>Nous pourrons vous appeler sur votre numéro (${numero}), donc gardez-le près de vous.</p>`;
 
-        // Envoi des détails de la commande par email via Formspree
-        sendOrderDetailsByEmail(name, numero, address);
-
-        // Vider le panier après la commande
         localStorage.removeItem('cart');
         localStorage.removeItem('stock');
     }
 
     function sendOrderDetailsByEmail(name, numero, address) {
-        // Récupérer le panier
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let orderDetails = `Nom : ${name}\nNuméro : ${numero}\nAdresse : ${address}\n\nDétails de la commande:\n`;
+        let orderDetails = `Nom : ${name}\nNuméro : ${numero}\nAdresse : ${address}\n\nCommande:\n`;
 
         cart.forEach(item => {
-            orderDetails += `${item.name} x${item.quantity} - ${item.price * item.quantity} f cfa\n`;
+            orderDetails += `- ${item.name} x${item.quantity} = ${item.price * item.quantity} F CFA\n`;
         });
 
-        const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-        orderDetails += `\nTotal : ${totalPrice} f cfa`;
+        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        orderDetails += `\nTotal : ${total} F CFA`;
 
-        // Envoi des détails de la commande à Formspree
-        fetch("https://formspree.io/f/xwplyjng", {
+        console.log("Détails de la commande :", orderDetails); // Debug
+
+        fetch("https://formspree.io/f/TON_ID_ICI", { // Remplace TON_ID_ICI
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 name: name,
-                email: "delicefastfood7@gmail.com", // Tu peux ajouter un champ email ici si tu veux
                 message: orderDetails
-            }),
+            })
         })
         .then(response => {
             if (response.ok) {
-                console.log("Commande envoyée avec succès !");
+                console.log("Commande envoyée !");
             } else {
-                console.log("Erreur lors de l'envoi de la commande.");
+                console.log("Erreur lors de l'envoi du formulaire.");
             }
         })
         .catch(error => {
-            console.log("Erreur:", error);
+            console.error("Erreur réseau :", error);
         });
     }
 });
