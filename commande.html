@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de commande</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="COMMANDE.css">
+</head>
+<body>
+    <header>
+        <h1>Confirmation de commande</h1>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="menu.html">Menu</a>
+            <a href="panier.html">Panier</a>
+        </nav>
+    </header>
+
+    <div class="order-summary">
+        <h2>Récapitulatif de la commande</h2>
+        <ul id="orderList"></ul>
+        <div id="totalPrice">Total: 0€</div>
+    </div>
+
+    <div class="order-form">
+        <h3>Informations de livraison</h3>
+        <form id="paymentForm" class="fm">
+            <input type="text" id="name" class="N" placeholder="Nom" required><br>
+            <input type="number" id="numero" class="E" placeholder="Numero de téléphone" required><br>
+            <input type="text" id="address" class="A" placeholder="addresse(quartier,rue,porte)" required><br>
+           
+          
+            <button type="submit" class="P">Passer la commande</button>
+        </form>
+    </div>
+
+    <div id="paymentMessage"></div>
+    <script src="order.js" defer></script>
+
+</body>
+</html>

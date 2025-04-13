@@ -1,0 +1,125 @@
+/* Global settings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgba(245, 34, 227, 0.1);
+}
+
+header {
+    background-color: #840070;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header nav {
+    margin-top: 0px;
+    margin-bottom: -10px;
+}
+
+header nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* Main product container */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Products will fill the screen */
+    gap: 20px;
+    padding: 20px;
+    justify-items: center; /* Centering items */
+    justify-content: center;
+}
+
+/* Product item styling */
+.product {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-align: center;
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.product button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.product button:hover {
+    background-color: #45a049;
+}
+
+.product p {
+    margin: 5px 0;
+}
+
+/* Confirmation message style */
+.confirmation-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgb(2, 116, 0);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    animation: fadeOut 2s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Responsive settings for smaller screens */
+@media (max-width: 768px) {
+    header nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .product-list {
+        grid-template-columns: 1fr 1fr; /* Two items per row for smaller screens */
+    }
+
+    .product {
+        margin: 10px 0;
+        width: 90%; /* Decreased width for better spacing */
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .product-list {
+        grid-template-columns: 1fr; /* One item per row for mobile */
+    }
+
+    .product {
+        width: 100%; /* Full width for each item */
+    }
+}
+
+

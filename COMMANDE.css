@@ -1,0 +1,160 @@
+
+.fm {
+
+    font-size: 50px;
+}
+.order-summary{
+    text-align: center;
+    font-size: 22px;
+    padding-top: 20px;
+    margin-top: 10px;
+    padding-bottom: -40PX;
+}
+.N {
+    font-size: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+.E {
+    font-size: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+.P {
+    font-size: 30px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+.A {
+    font-size: 30px;
+    padding-left: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+/* Reset & base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    padding: 20px;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #840070;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+header nav {
+    margin-top: 10px;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* Order summary section */
+.order-summary {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary h2 {
+    margin-bottom: 15px;
+    color: #840070;
+}
+
+.order-summary ul {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+#totalPrice {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Order form section */
+.order-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-form h3 {
+    margin-bottom: 15px;
+    color: #840070;
+}
+
+.order-form form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.order-form form button {
+    background-color: #840070;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.order-form form button:hover {
+    background-color: #a3008d;
+}
+
+/* Confirmation message */
+#paymentMessage {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: green;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header nav a {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .order-summary,
+    .order-form {
+        padding: 15px;
+    }
+
+    .order-form form input,
+    .order-form form button {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,152 @@
+/* Body and background */
+body ul {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.836), rgba(0, 0, 0, 0.836)), url(./assets/product1.png);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-position-y: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border-radius: 50px;
+    border-color: #000;
+    margin-top: 10px;
+    padding: 0;
+}
+
+/* Title styling */
+body ul h1 {
+    color: #fff;
+    text-align: center;
+    padding: 150px;
+    font-size: 75px;
+    margin: 0;
+}
+
+/* Subtitle link styling */
+body ul h2 a {
+    color: #fff;
+    text-align: center;
+    padding: 450px;
+    font-size: 30px;
+    border: 30px;
+    display: inline-block; /* Fixes positioning issue */
+}
+
+/* Button styling */
+.bouton {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bouton a {
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    font-size: 40px;
+    transition: 0.6s ease;
+}
+
+.bouton a:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Section styling */
+section {
+    background-color: #fff;
+    border-radius: 30px;
+    padding-left: 30px;
+    margin: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Responsive settings for smaller screens */
+@media (max-width: 768px) {
+    body ul h1 {
+        font-size: 50px;
+        padding: 100px;
+    }
+
+    body ul h2 a {
+        font-size: 25px;
+        padding: 200px 0; /* Adjust padding */
+    }
+
+    .bouton a {
+        font-size: 30px;
+    }
+
+    section {
+        padding-left: 20px;
+        margin: 15px;
+    }
+}
+
+/* Extra small devices (mobile) */
+@media (max-width: 480px) {
+    body ul h1 {
+        font-size: 35px;
+        padding: 50px;
+    }
+
+    body ul h2 a {
+        font-size: 20px;
+        padding: 100px 0; /* Adjust padding */
+    }
+
+    .bouton a {
+        font-size: 25px;
+    }
+
+    section {
+        padding-left: 10px;
+        margin: 10px;
+    }
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 10px;
+}
+
+/* Header */
+header {
+    background-color: #840070;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+header nav {
+    margin-top: 10px;
+}
+
+header nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
