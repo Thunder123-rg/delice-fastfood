@@ -44,4 +44,31 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.removeItem('cart');
         localStorage.removeItem('stock');
     }
+    
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const orderList = document.querySelector("#orderList");
+    const orderDetails = document.querySelector("#orderDetails");
+    const totalPrice = document.querySelector("#totalPrice");
+
+    let panier = JSON.parse(localStorage.getItem("panier")) || [];
+
+    let total = 0;
+    let detailsTexte = "";
+
+    panier.forEach(item => {
+        let li = document.createElement("li");
+        li.textContent = `${item.nom} - ${item.prix}€`;
+        orderList.appendChild(li);
+
+        total += item.prix;
+        detailsTexte += `• ${item.nom} - ${item.prix}€\n`;
+    });
+
+    totalPrice.textContent = `Total: ${total}€`;
+    detailsTexte += `\nTotal: ${total}€`;
+
+    // Remplir la zone de texte automatiquement
+    orderDetails.value = detailsTexte;
+});
+
