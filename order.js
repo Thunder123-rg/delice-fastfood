@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         console.log("Détails de la commande :", orderDetails); // Debug
 
-        fetch("https://formspree.io/f/TON_ID_ICI", { // Remplace TON_ID_ICI
+        fetch("https://formspree.io/f/xwplyjng", { // Remplace TON_ID_ICI
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
