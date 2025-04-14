@@ -4,18 +4,23 @@ document.addEventListener("DOMContentLoaded", function() {
     function loadOrderSummary() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const orderList = document.getElementById('orderList');
+        const orderDetails = document.getElementById('orderDetails');
         const totalPriceElement = document.getElementById('totalPrice');
         let totalPrice = 0;
+        let detailsTexte = "";
 
         orderList.innerHTML = '';
         cart.forEach(item => {
             const li = document.createElement('li');
-            li.textContent = `${item.name} x${item.quantity} - ${item.price * item.quantity} F CFA`;
+            li.textContent = `${item.name} x${item.quantity} - ${item.price * item.quantity} f cfa`;
             orderList.appendChild(li);
             totalPrice += item.price * item.quantity;
+            detailsTexte += `${item.name} - ${item.price}f cfa\n`;
         });
 
-        totalPriceElement.textContent = `Total: ${totalPrice} F CFA`;
+        totalPriceElement.textContent = `Total: ${totalPrice} f cfa`;
+        detailsTexte += `\nTotal: ${totalPrice} f cfa `;
+        orderDetails.value = detailsTexte;
     }
 
     const paymentForm = document.getElementById('paymentForm');
@@ -30,53 +35,18 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        sendOrderDetailsByEmail(name, numero, address);
         processPayment(name, numero, address);
     });
 
     function processPayment(name, numero, address) {
         const paymentMessage = document.getElementById('paymentMessage');
-        paymentMessage.innerHTML = `<p>Merci pour votre commande, ${name} !</p>
-            <p>Nous vous prions de patienter.</p>
-            <p>Votre commande est prise en charge et elle sera livrée à l'adresse : ${address}</p>
-            <p>Nous pourrons vous appeler sur votre numéro (${numero}), donc gardez-le près de vous.</p>`;
+        paymentMessage.innerHTML = `<p>Merci pour votre commande, ${name}!</p>
+                                    <p>Nous vous prions de patienté.</p>
+                                    <p>Votre commande est prise en charge et elle sera livrée à l'adresse : ${address}</p>
+                                    <p>nous pourrons vous appelé sur votre numero( ${numero} ) donc gardez le près de vous</p>`;
+                                    
 
         localStorage.removeItem('cart');
         localStorage.removeItem('stock');
     }
-
-    function sendOrderDetailsByEmail(name, numero, address) {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let orderDetails = `Nom : ${name}\nNuméro : ${numero}\nAdresse : ${address}\n\nCommande:\n`;
-
-        cart.forEach(item => {
-            orderDetails += `- ${item.name} x${item.quantity} = ${item.price * item.quantity} F CFA\n`;
-        });
-
-        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        orderDetails += `\nTotal : ${total} F CFA`;
-
-        console.log("Détails de la commande :", orderDetails); // Debug
-
-        fetch("https://formspree.io/f/xwplyjng", { // Remplace TON_ID_ICI
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: name,
-                message: orderDetails
-            })
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log("Commande envoyée !");
-            } else {
-                console.log("Erreur lors de l'envoi du formulaire.");
-            }
-        })
-        .catch(error => {
-            console.error("Erreur réseau :", error);
-        });
-    }
-});
+});   
