@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://thunder123-rg.github.io/delice-fastfood/sitemap.xml
